@@ -19,6 +19,9 @@
       .controls { position: fixed; right: 12px; bottom: 12px; display: flex; gap: 8px; }
       .controls button { padding: 8px 12px; border-radius: 10px; border: 1px solid #2a3656; background: #0f1736; color: #e5e7eb; font-weight: 700; cursor: pointer; }
       .controls button:hover { border-color: #4c9aff; box-shadow: 0 2px 12px #0008; }
+      .ql-button { position: fixed; left: 50%; transform: translateX(-50%); bottom: 16px; display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; border-radius: 999px; border: 1px solid #2a3656; background: #0f1736; color: #e5e7eb; font-weight: 800; cursor: pointer; box-shadow: 0 6px 20px #0006; }
+      .ql-button:hover { border-color: #4c9aff; }
+      .ql-icon { width: 20px; height: 20px; }
       .swiper { position: fixed; top: 52px; left: 50%; transform: translateX(-50%); width: 220px; height: 40px; z-index: 10; }
       .swiper-slide { display: flex; align-items: center; justify-content: center; color: #cbd5e1; background: #0f1736; border: 1px solid #2a3656; border-radius: 10px; }
       .swiper-pagination-bullets .swiper-pagination-bullet { background: #4c9aff; }
@@ -48,9 +51,16 @@
       shadow-intensity="0.8"
       environment-image="legacy"
     >
-      <button slot="ar-button" style="position: absolute; left: 50%; transform: translateX(-50%); bottom: 24px; padding: 10px 16px; border-radius: 999px; border: 0; background: #4c9aff; color: white; font-weight: 700; box-shadow: 0 6px 20px #0006;">View in AR Quick Look</button>
       <div id="ar-prompt" slot="ar-prompt" style="display:none"></div>
     </model-viewer>
+
+    <button id="quickLookBtn" class="ql-button" type="button" aria-label="Open in Quick Look">
+      <svg class="ql-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 2l9 5v10l-9 5-9-5V7l9-5z" stroke="#9ab4ff" stroke-width="1.5"/>
+        <path d="M12 7l5 3v4l-5 3-5-3V10l5-3z" stroke="#9ab4ff" stroke-width="1.5"/>
+      </svg>
+      Quick Look
+    </button>
 
     <h1 class="title-top" id="title">Room</h1>
     <div class="swiper" id="modelSwiper">
@@ -97,6 +107,18 @@
         applyModel(currentIndex);
       });
       applyModel(currentIndex);
+
+      // Quick Look button: ask confirmation then activate AR (iOS Quick Look)
+      const quickBtn = document.getElementById('quickLookBtn');
+      quickBtn.addEventListener('click', () => {
+        const proceed = confirm('Open this 3D model?');
+        if (!proceed) return;
+        try {
+          viewer.activateAR();
+        } catch (e) {
+          alert('AR Quick Look is not available on this device.');
+        }
+      });
     </script>
   </body>
   </html>
