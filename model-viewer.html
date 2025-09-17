@@ -6,6 +6,8 @@
     <title>model-viewer AR (Quick Look, Scene Viewer, WebXR)</title>
     <meta name="description" content="A minimal model-viewer example supporting iOS Quick Look, Android Scene Viewer, and WebXR." />
     <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/swiper@11/swiper-bundle.min.css" />
+    <script src="https://unpkg.com/swiper@11/swiper-bundle.min.js"></script>
     <style>
       html, body { height: 100%; margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; background: #0b1020; color: #e5e7eb; }
       .header { display: none; }
@@ -13,10 +15,13 @@
       .caption { position: fixed; bottom: 12px; left: 12px; right: 12px; color: #cbd5e1; font-size: .95rem; text-shadow: 0 1px 2px #0008; }
       .caption code { background: #0006; padding: 1px 6px; border-radius: 6px; }
       .credit { position: fixed; bottom: 12px; right: 12px; font-size: 0.85rem; color: #9ca3af; }
-      .title-center { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); margin: 0; padding: 6px 12px; font-size: 2rem; font-weight: 800; color: #ffffff; text-shadow: 0 2px 12px #000a; pointer-events: none; }
+      .title-top { position: fixed; top: 12px; left: 50%; transform: translateX(-50%); margin: 0; padding: 6px 12px; font-size: 1.4rem; font-weight: 800; color: #ffffff; text-shadow: 0 2px 12px #000a; pointer-events: none; z-index: 10; }
       .controls { position: fixed; right: 12px; bottom: 12px; display: flex; gap: 8px; }
       .controls button { padding: 8px 12px; border-radius: 10px; border: 1px solid #2a3656; background: #0f1736; color: #e5e7eb; font-weight: 700; cursor: pointer; }
       .controls button:hover { border-color: #4c9aff; box-shadow: 0 2px 12px #0008; }
+      .swiper { position: fixed; top: 52px; left: 50%; transform: translateX(-50%); width: 220px; height: 40px; z-index: 10; }
+      .swiper-slide { display: flex; align-items: center; justify-content: center; color: #cbd5e1; background: #0f1736; border: 1px solid #2a3656; border-radius: 10px; }
+      .swiper-pagination-bullets .swiper-pagination-bullet { background: #4c9aff; }
     </style>
   </head>
   <body>
@@ -47,7 +52,14 @@
       <div id="ar-prompt" slot="ar-prompt" style="display:none"></div>
     </model-viewer>
 
-    <h1 class="title-center">Rooms</h1>
+    <h1 class="title-top" id="title">Room</h1>
+    <div class="swiper" id="modelSwiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">Room 1</div>
+        <div class="swiper-slide">Room 2</div>
+      </div>
+      <div class="swiper-pagination"></div>
+    </div>
     <div class="controls">
       <button id="prevBtn" type="button">Prev</button>
       <button id="nextBtn" type="button">Next</button>
@@ -59,19 +71,29 @@
         { glb: 'assets/room2.glb', usdz: 'assets/roomm2.usdz' },
       ];
       const viewer = document.getElementById('viewer');
+      const titleEl = document.getElementById('title');
+      const swiper = new Swiper('#modelSwiper', {
+        allowTouchMove: false,
+        slidesPerView: 1,
+        spaceBetween: 10,
+        pagination: { el: '.swiper-pagination', clickable: true },
+      });
       let currentIndex = 0;
       const applyModel = (index) => {
         const m = models[index];
         if (!m) return;
         viewer.src = m.glb;
         if (m.usdz) viewer.setAttribute('ios-src', m.usdz); else viewer.removeAttribute('ios-src');
+        titleEl.textContent = `Room ${index + 1}`;
       };
       document.getElementById('prevBtn').addEventListener('click', () => {
-        currentIndex = (currentIndex - 1 + models.length) % models.length;
-        applyModel(currentIndex);
+        swiper.slidePrev();
       });
       document.getElementById('nextBtn').addEventListener('click', () => {
-        currentIndex = (currentIndex + 1) % models.length;
+        swiper.slideNext();
+      });
+      swiper.on('slideChange', () => {
+        currentIndex = swiper.realIndex;
         applyModel(currentIndex);
       });
       applyModel(currentIndex);
