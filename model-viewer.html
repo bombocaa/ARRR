@@ -97,14 +97,6 @@
         applyModel(currentIndex);
       });
       applyModel(currentIndex);
-
-      // Auto-open Quick Look on iOS by redirecting straight to the USDZ.
-      const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
-      if (isIOS) {
-        const usdzUrl = models[currentIndex].usdz;
-        // Delay to allow page load/render when coming from QR scan, then redirect.
-        setTimeout(() => { window.location.replace(usdzUrl); }, 150);
-      }
     </script>
   </body>
   </html>
