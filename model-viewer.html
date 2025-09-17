@@ -13,6 +13,10 @@
       .caption { position: fixed; bottom: 12px; left: 12px; right: 12px; color: #cbd5e1; font-size: .95rem; text-shadow: 0 1px 2px #0008; }
       .caption code { background: #0006; padding: 1px 6px; border-radius: 6px; }
       .credit { position: fixed; bottom: 12px; right: 12px; font-size: 0.85rem; color: #9ca3af; }
+      .title-center { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); margin: 0; padding: 6px 12px; font-size: 2rem; font-weight: 800; color: #ffffff; text-shadow: 0 2px 12px #000a; pointer-events: none; }
+      .controls { position: fixed; right: 12px; bottom: 12px; display: flex; gap: 8px; }
+      .controls button { padding: 8px 12px; border-radius: 10px; border: 1px solid #2a3656; background: #0f1736; color: #e5e7eb; font-weight: 700; cursor: pointer; }
+      .controls button:hover { border-color: #4c9aff; box-shadow: 0 2px 12px #0008; }
     </style>
   </head>
   <body>
@@ -43,13 +47,39 @@
       <div id="ar-prompt" slot="ar-prompt" style="display:none"></div>
     </model-viewer>
 
-    
+    <h1 class="title-center">Rooms</h1>
+    <div class="controls">
+      <button id="prevBtn" type="button">Prev</button>
+      <button id="nextBtn" type="button">Next</button>
+    </div>
 
     <script type="module">
+      const models = [
+        { glb: 'assets/room.glb', usdz: 'assets/roomm.usdz' },
+        { glb: 'assets/room2.glb', usdz: 'assets/roomm2.usdz' },
+      ];
+      const viewer = document.getElementById('viewer');
+      let currentIndex = 0;
+      const applyModel = (index) => {
+        const m = models[index];
+        if (!m) return;
+        viewer.src = m.glb;
+        if (m.usdz) viewer.setAttribute('ios-src', m.usdz); else viewer.removeAttribute('ios-src');
+      };
+      document.getElementById('prevBtn').addEventListener('click', () => {
+        currentIndex = (currentIndex - 1 + models.length) % models.length;
+        applyModel(currentIndex);
+      });
+      document.getElementById('nextBtn').addEventListener('click', () => {
+        currentIndex = (currentIndex + 1) % models.length;
+        applyModel(currentIndex);
+      });
+      applyModel(currentIndex);
+
       // Auto-open Quick Look on iOS by redirecting straight to the USDZ.
       const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
       if (isIOS) {
-        const usdzUrl = 'assets/roomm.usdz';
+        const usdzUrl = models[currentIndex].usdz;
         // Delay to allow page load/render when coming from QR scan, then redirect.
         setTimeout(() => { window.location.replace(usdzUrl); }, 150);
       }
