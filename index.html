@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>AR Demos: model-viewer & AR.js</title>
-    <meta name="description" content="Quick AR demos using model-viewer (with iOS Quick Look) and AR.js marker tracking." />
+    <title>AR Demo: model-viewer</title>
+    <meta name="description" content="Quick AR demo using model-viewer (iOS Quick Look, Android Scene Viewer, WebXR plane detection)." />
     <style>
       :root { color-scheme: light dark; }
       html, body { height: 100%; margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; }
@@ -21,16 +21,12 @@
   <body>
     <div class="wrap">
       <div class="card">
-        <h1>Augmented Reality Quick Demos</h1>
-        <p>Two lightweight examples you can run locally:</p>
+        <h1>Augmented Reality Demo</h1>
+        <p>Markerless AR powered by model-viewer:</p>
         <div class="grid">
           <a class="tile" href="model-viewer.html">
             <strong>model-viewer (Quick Look, Scene Viewer, WebXR)</strong>
             <div class="small">Tap the AR button to launch native AR on iOS (Quick Look) or Android (Scene Viewer). Works on desktop with WebXR if available.</div>
-          </a>
-          <a class="tile" href="arjs-marker.html">
-            <strong>AR.js Marker Tracking (Hiro)</strong>
-            <div class="small">Point your camera at the Hiro marker to see the model anchored to it. Uses your device camera in-browser.</div>
           </a>
         </div>
         <p class="small" style="margin-top:16px;">Tip: Serve these files over HTTP. For example: <code>npx serve -l 8080 .</code> then open <code>http://localhost:8080</code>.</p>
