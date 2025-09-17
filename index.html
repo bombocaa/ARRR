@@ -49,12 +49,30 @@
         font-size: 0.9rem;
       }
     </style>
+    <script>
+      function openInAR(event) {
+        event.preventDefault();
+        const url = event.target.closest('a').href;
+        
+        // Try to open in Quick Look
+        if (navigator.userAgent.match(/iPhone|iPad|iPod/i)) {
+          // iOS - try Quick Look
+          window.location.href = url;
+        } else if (navigator.userAgent.match(/Android/i)) {
+          // Android - try Scene Viewer
+          window.location.href = `intent://arvr.google.com/scene-viewer/1.0?file=${encodeURIComponent(url)}#Intent;scheme=https;package=com.google.ar.core;action=android.intent.action.VIEW;S.browser_fallback_url=${encodeURIComponent(url)};end;`;
+        } else {
+          // Fallback - direct download
+          window.location.href = url;
+        }
+      }
+    </style>
   </head>
   <body>
     <div class="container">
       <h1>AR Brochure</h1>
       <p>View our brochure in Augmented Reality</p>
-      <a href="assets/brochure.usdc" rel="ar" class="ar-button">
+      <a href="assets/brochure.usdc" rel="ar" class="ar-button" onclick="openInAR(event)">
         <svg class="ar-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M12 2l9 5v10l-9 5-9-5V7l9-5z" stroke="currentColor" stroke-width="1.5"/>
           <path d="M12 7l5 3v4l-5 3-5-3V10l5-3z" stroke="currentColor" stroke-width="1.5"/>
