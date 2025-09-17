@@ -16,9 +16,10 @@
       .caption code { background: #0006; padding: 1px 6px; border-radius: 6px; }
       .credit { position: fixed; bottom: 12px; right: 12px; font-size: 0.85rem; color: #9ca3af; }
       .title-top { position: fixed; top: 12px; left: 50%; transform: translateX(-50%); margin: 0; padding: 6px 12px; font-size: 1.4rem; font-weight: 800; color: #ffffff; text-shadow: 0 2px 12px #000a; pointer-events: none; z-index: 10; }
-      .controls { position: fixed; right: 12px; bottom: 12px; display: flex; gap: 8px; }
-      .controls button { padding: 8px 12px; border-radius: 10px; border: 1px solid #2a3656; background: #0f1736; color: #e5e7eb; font-weight: 700; cursor: pointer; }
-      .controls button:hover { border-color: #4c9aff; box-shadow: 0 2px 12px #0008; }
+      .nav-btn { position: fixed; top: 50%; transform: translateY(-50%); display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 50%; border: 1px solid #2a3656; background: #0f1736; color: #e5e7eb; cursor: pointer; box-shadow: 0 6px 20px #0006; }
+      .nav-btn:hover { border-color: #4c9aff; }
+      #navLeft { left: 12px; }
+      #navRight { right: 12px; }
       .ql-button { position: fixed; left: 50%; transform: translateX(-50%); bottom: 16px; display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; border-radius: 999px; border: 1px solid #2a3656; background: #0f1736; color: #e5e7eb; font-weight: 800; cursor: pointer; box-shadow: 0 6px 20px #0006; }
       .ql-button:hover { border-color: #4c9aff; }
       .ql-icon { width: 20px; height: 20px; }
@@ -70,10 +71,16 @@
       </div>
       <div class="swiper-pagination"></div>
     </div>
-    <div class="controls">
-      <button id="prevBtn" type="button">Prev</button>
-      <button id="nextBtn" type="button">Next</button>
-    </div>
+    <button id="navLeft" class="nav-btn" type="button" aria-label="Previous">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M15 6l-6 6 6 6" stroke="#9ab4ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+    <button id="navRight" class="nav-btn" type="button" aria-label="Next">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M9 6l6 6-6 6" stroke="#9ab4ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
 
     <script type="module">
       const models = [
@@ -96,12 +103,8 @@
         if (m.usdz) viewer.setAttribute('ios-src', m.usdz); else viewer.removeAttribute('ios-src');
         titleEl.textContent = `Room ${index + 1}`;
       };
-      document.getElementById('prevBtn').addEventListener('click', () => {
-        swiper.slidePrev();
-      });
-      document.getElementById('nextBtn').addEventListener('click', () => {
-        swiper.slideNext();
-      });
+      document.getElementById('navLeft').addEventListener('click', () => { swiper.slidePrev(); });
+      document.getElementById('navRight').addEventListener('click', () => { swiper.slideNext(); });
       swiper.on('slideChange', () => {
         currentIndex = swiper.realIndex;
         applyModel(currentIndex);
