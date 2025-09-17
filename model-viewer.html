@@ -8,9 +8,7 @@
     <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
     <style>
       html, body { height: 100%; margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; background: #0b1020; color: #e5e7eb; }
-      .header { position: fixed; top: 0; left: 0; right: 0; padding: 10px 14px; display: flex; gap: 10px; align-items: center; background: #0b1020cc; backdrop-filter: blur(6px); }
-      .header a { color: #9ab4ff; text-decoration: none; font-weight: 600; }
-      .header a:hover { text-decoration: underline; }
+      .header { display: none; }
       model-viewer { width: 100%; height: 100%; --poster-color: #0b1020; }
       .caption { position: fixed; bottom: 12px; left: 12px; right: 12px; color: #cbd5e1; font-size: .95rem; text-shadow: 0 1px 2px #0008; }
       .caption code { background: #0006; padding: 1px 6px; border-radius: 6px; }
@@ -18,10 +16,7 @@
     </style>
   </head>
   <body>
-    <div class="header">
-      <a href="./">← Back</a>
-      <div>model-viewer AR demo</div>
-    </div>
+    <div class="header"></div>
 
     <!--
       Notes:
@@ -48,7 +43,7 @@
       <div id="ar-prompt" slot="ar-prompt" style="display:none"></div>
     </model-viewer>
 
-    <div class="credit">Model: <code>assets/room.glb</code> ↔ <code>assets/roomm.usdz</code></div>
+    
 
     <script type="module">
       // Auto-open Quick Look on iOS by redirecting straight to the USDZ.
