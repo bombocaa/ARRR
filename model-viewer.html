@@ -48,10 +48,17 @@
       <div id="ar-prompt" slot="ar-prompt" style="display:none"></div>
     </model-viewer>
 
-    <div class="caption">Tap <strong>View in AR Quick Look</strong> to open the USDZ in iOS Quick Look. (On non‑iOS devices, Quick Look is not available.)</div>
     <div class="credit">Model: <code>assets/room.glb</code> ↔ <code>assets/roomm.usdz</code></div>
 
-    <script type="module"></script>
+    <script type="module">
+      // Auto-open Quick Look on iOS by redirecting straight to the USDZ.
+      const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+      if (isIOS) {
+        const usdzUrl = 'assets/roomm.usdz';
+        // Delay to allow page load/render when coming from QR scan, then redirect.
+        setTimeout(() => { window.location.replace(usdzUrl); }, 150);
+      }
+    </script>
   </body>
   </html>
 
