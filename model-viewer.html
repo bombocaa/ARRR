@@ -40,9 +40,9 @@
     -->
     <model-viewer
       id="viewer"
-      src="assets/brochure.glb"
-      ios-src="assets/brochure.usdc"
-      alt="Brochure model"
+      src="assets/room.glb"
+      ios-src="assets/roomm.usdz"
+      alt="Room model"
       ar
       ar-modes="quick-look"
       ar-placement="floor"
@@ -67,12 +67,13 @@
       </svg>
       Quick Look
     </button>
-    <a id="qlLink" rel="ar" href="assets/brochure.usdc" style="display:none"></a>
+    <a id="qlLink" rel="ar" href="assets/roomm.usdz" style="display:none"></a>
 
-    <h1 class="title-top" id="title">Brochure</h1>
+    <h1 class="title-top" id="title">Room</h1>
     <div class="swiper" id="modelSwiper">
       <div class="swiper-wrapper">
-        <div class="swiper-slide">Brochure</div>
+        <div class="swiper-slide">Room 1</div>
+        <div class="swiper-slide">Room 2</div>
       </div>
       <div class="swiper-pagination"></div>
     </div>
@@ -89,7 +90,8 @@
 
     <script type="module">
       const models = [
-        { glb: 'assets/brochure.glb', usdz: 'assets/brochure.usdc' },
+        { glb: 'assets/room.glb', usdz: 'assets/room1.1.usdc' },
+        { glb: 'assets/room2.glb', usdz: 'assets/room2.1.usdc' },
       ];
       const viewer = document.getElementById('viewer');
       const titleEl = document.getElementById('title');
@@ -106,7 +108,7 @@
         if (!m) return;
         viewer.src = m.glb;
         if (m.usdz) viewer.setAttribute('ios-src', m.usdz); else viewer.removeAttribute('ios-src');
-        titleEl.textContent = 'Brochure';
+        titleEl.textContent = `Room ${index + 1}`;
         if (m.usdz) qlLink.setAttribute('href', m.usdz);
       };
       document.getElementById('navLeft').addEventListener('click', () => { swiper.slidePrev(); });
@@ -114,7 +116,6 @@
       swiper.on('slideChange', () => {
         currentIndex = swiper.realIndex;
         applyModel(currentIndex);
-        
       });
       applyModel(currentIndex);
 
