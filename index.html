@@ -3,19 +3,67 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta http-equiv="refresh" content="0; url=model-viewer.html" />
-    <title>Redirecting…</title>
-    <script>
-      window.location.replace('model-viewer.html');
-    </script>
+    <title>AR Brochure</title>
     <style>
-      html, body { height: 100%; margin: 0; display: grid; place-items: center; font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; background:#0b1020; color:#e5e7eb; }
-      a { color:#9ab4ff; }
+      html, body { 
+        height: 100%; 
+        margin: 0; 
+        display: grid; 
+        place-items: center; 
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; 
+        background: #0b1020; 
+        color: #e5e7eb; 
+      }
+      .container {
+        text-align: center;
+        padding: 2rem;
+      }
+      .ar-button {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        padding: 16px 24px;
+        border-radius: 12px;
+        border: 2px solid #4c9aff;
+        background: #0f1736;
+        color: #e5e7eb;
+        font-size: 1.2rem;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 20px rgba(76, 154, 255, 0.3);
+      }
+      .ar-button:hover {
+        background: #4c9aff;
+        color: #0b1020;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 25px rgba(76, 154, 255, 0.4);
+      }
+      .ar-icon {
+        width: 24px;
+        height: 24px;
+      }
+      .description {
+        margin-top: 1rem;
+        color: #9ca3af;
+        font-size: 0.9rem;
+      }
     </style>
   </head>
   <body>
-    <div>If you are not redirected, <a href="model-viewer.html">open the AR viewer</a>.</div>
+    <div class="container">
+      <h1>AR Brochure</h1>
+      <p>View our brochure in Augmented Reality</p>
+      <a href="assets/brochure.usdc" rel="ar" class="ar-button">
+        <svg class="ar-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2l9 5v10l-9 5-9-5V7l9-5z" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M12 7l5 3v4l-5 3-5-3V10l5-3z" stroke="currentColor" stroke-width="1.5"/>
+        </svg>
+        Open in AR
+      </a>
+      <p class="description">Tap to view in Quick Look (iOS) or Scene Viewer (Android)</p>
+    </div>
   </body>
-  </html>
+</html>
 
 
