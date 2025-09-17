@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>model-viewer AR (Quick Look, Scene Viewer, WebXR)</title>
+    <meta name="description" content="A minimal model-viewer example supporting iOS Quick Look, Android Scene Viewer, and WebXR." />
+    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+    <style>
+      html, body { height: 100%; margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; background: #0b1020; color: #e5e7eb; }
+      .header { position: fixed; top: 0; left: 0; right: 0; padding: 10px 14px; display: flex; gap: 10px; align-items: center; background: #0b1020cc; backdrop-filter: blur(6px); }
+      .header a { color: #9ab4ff; text-decoration: none; font-weight: 600; }
+      .header a:hover { text-decoration: underline; }
+      model-viewer { width: 100%; height: 100%; --poster-color: #0b1020; }
+      .caption { position: fixed; bottom: 12px; left: 12px; right: 12px; color: #cbd5e1; font-size: .95rem; text-shadow: 0 1px 2px #0008; }
+      .caption code { background: #0006; padding: 1px 6px; border-radius: 6px; }
+      .credit { position: fixed; bottom: 12px; right: 12px; font-size: 0.85rem; color: #9ca3af; }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <a href="./">← Back</a>
+      <div>model-viewer AR demo</div>
+    </div>
+
+    <!--
+      Notes:
+      - src: GLB/GLTF for web preview
+      - ios-src: USDZ for iOS Quick Look
+      - ar-modes: 'quick-look scene-viewer webxr'
+      - ar: shows the AR button
+    -->
+    <model-viewer
+      id="viewer"
+      src="assets/room.glb"
+      ios-src="assets/roomm.usdz"
+      alt="Room model"
+      ar
+      ar-modes="quick-look scene-viewer webxr"
+      ar-placement="floor"
+      ar-scale="fixed"
+      camera-controls
+      exposure="0.9"
+      shadow-intensity="0.8"
+      environment-image="legacy"
+    >
+      <button slot="ar-button" style="position: absolute; left: 50%; transform: translateX(-50%); bottom: 24px; padding: 10px 16px; border-radius: 999px; border: 0; background: #4c9aff; color: white; font-weight: 700; box-shadow: 0 6px 20px #0006;">View in AR</button>
+      <div id="ar-prompt" slot="ar-prompt" style="display:none"></div>
+    </model-viewer>
+
+    <div class="caption">Tap <strong>View in AR</strong>. iOS uses <strong>Quick Look</strong> via the USDZ, Android uses <strong>Scene Viewer</strong>, and supported browsers use <strong>WebXR</strong> plane detection.</div>
+    <div class="credit">Model: <code>assets/room.glb</code> ↔ <code>assets/roomm.usdz</code></div>
+
+    <script type="module"></script>
+  </body>
+  </html>
+
+
