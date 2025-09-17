@@ -62,6 +62,7 @@
       </svg>
       Quick Look
     </button>
+    <a id="qlLink" rel="ar" href="assets/roomm.usdz" style="display:none"></a>
 
     <h1 class="title-top" id="title">Room</h1>
     <div class="swiper" id="modelSwiper">
@@ -89,6 +90,7 @@
       ];
       const viewer = document.getElementById('viewer');
       const titleEl = document.getElementById('title');
+      const qlLink = document.getElementById('qlLink');
       const swiper = new Swiper('#modelSwiper', {
         allowTouchMove: false,
         slidesPerView: 1,
@@ -102,6 +104,7 @@
         viewer.src = m.glb;
         if (m.usdz) viewer.setAttribute('ios-src', m.usdz); else viewer.removeAttribute('ios-src');
         titleEl.textContent = `Room ${index + 1}`;
+        if (m.usdz) qlLink.setAttribute('href', m.usdz);
       };
       document.getElementById('navLeft').addEventListener('click', () => { swiper.slidePrev(); });
       document.getElementById('navRight').addEventListener('click', () => { swiper.slideNext(); });
@@ -119,7 +122,12 @@
         try {
           viewer.activateAR();
         } catch (e) {
-          alert('AR Quick Look is not available on this device.');
+          // Fallback: direct Quick Look link
+          if (qlLink && qlLink.href) {
+            qlLink.click();
+          } else {
+            alert('Could not open in Quick Look. Ensure the USDZ is accessible over HTTPS with Content-Type model/vnd.usdz+zip.');
+          }
         }
       });
     </script>
