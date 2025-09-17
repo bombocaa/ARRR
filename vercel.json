@@ -1,0 +1,13 @@
+{
+  "headers": [
+    {
+      "source": "/assets/(.*)\\.usdz",
+      "headers": [
+        { "key": "Content-Type", "value": "model/vnd.usdz+zip" },
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    }
+  ]
+}
+
+
