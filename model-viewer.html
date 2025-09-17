@@ -46,7 +46,7 @@
       ar
       ar-modes="quick-look"
       ar-placement="floor"
-      ar-scale="fixed"
+      ar-scale="auto"
       camera-controls
       disable-zoom
       camera-target="auto"
@@ -107,9 +107,9 @@
         const m = models[index];
         if (!m) return;
         viewer.src = m.glb;
-        if (m.usdz) viewer.setAttribute('ios-src', `${m.usdz}#allowsContentScaling=0`); else viewer.removeAttribute('ios-src');
+        if (m.usdz) viewer.setAttribute('ios-src', m.usdz); else viewer.removeAttribute('ios-src');
         titleEl.textContent = `Room ${index + 1}`;
-        if (m.usdz) qlLink.setAttribute('href', `${m.usdz}#allowsContentScaling=0`);
+        if (m.usdz) qlLink.setAttribute('href', m.usdz);
       };
       document.getElementById('navLeft').addEventListener('click', () => { swiper.slidePrev(); });
       document.getElementById('navRight').addEventListener('click', () => { swiper.slideNext(); });
