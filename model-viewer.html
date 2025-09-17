@@ -36,7 +36,7 @@
       ios-src="assets/roomm.usdz"
       alt="Room model"
       ar
-      ar-modes="quick-look scene-viewer webxr"
+      ar-modes="quick-look"
       ar-placement="floor"
       ar-scale="fixed"
       camera-controls
@@ -44,11 +44,11 @@
       shadow-intensity="0.8"
       environment-image="legacy"
     >
-      <button slot="ar-button" style="position: absolute; left: 50%; transform: translateX(-50%); bottom: 24px; padding: 10px 16px; border-radius: 999px; border: 0; background: #4c9aff; color: white; font-weight: 700; box-shadow: 0 6px 20px #0006;">View in AR</button>
+      <button slot="ar-button" style="position: absolute; left: 50%; transform: translateX(-50%); bottom: 24px; padding: 10px 16px; border-radius: 999px; border: 0; background: #4c9aff; color: white; font-weight: 700; box-shadow: 0 6px 20px #0006;">View in AR Quick Look</button>
       <div id="ar-prompt" slot="ar-prompt" style="display:none"></div>
     </model-viewer>
 
-    <div class="caption">Tap <strong>View in AR</strong>. iOS uses <strong>Quick Look</strong> via the USDZ, Android uses <strong>Scene Viewer</strong>, and supported browsers use <strong>WebXR</strong> plane detection.</div>
+    <div class="caption">Tap <strong>View in AR Quick Look</strong> to open the USDZ in iOS Quick Look. (On non‑iOS devices, Quick Look is not available.)</div>
     <div class="credit">Model: <code>assets/room.glb</code> ↔ <code>assets/roomm.usdz</code></div>
 
     <script type="module"></script>
