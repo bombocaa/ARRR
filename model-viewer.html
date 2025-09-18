@@ -40,8 +40,8 @@
     -->
     <model-viewer
       id="viewer"
-      src="assets/2.glb.usdz"
-      ios-src="assets/2.glb.usdz"
+      src="assets/latest3.usdz"
+      ios-src="assets/latest3.usdz"
       alt="Brochure model"
       ar
       ar-modes="quick-look"
@@ -49,10 +49,10 @@
       ar-scale="auto"
       camera-controls
       disable-zoom
-      camera-target="auto"
-      camera-orbit="0deg 65deg 130%"
-      min-camera-orbit="auto auto 130%"
-      max-camera-orbit="auto auto 130%"
+      camera-target="0m 0m 0m"
+      camera-orbit="0deg 0deg 100%"
+      min-camera-orbit="auto auto 100%"
+      max-camera-orbit="auto auto 100%"
       exposure="0.9"
       shadow-intensity="0.8"
       environment-image="legacy"
@@ -67,7 +67,7 @@
       </svg>
       Quick Look
     </button>
-    <a id="qlLink" rel="ar" href="assets/2.glb.usdz" style="display:none"></a>
+    <a id="qlLink" rel="ar" href="assets/latest3.usdz" style="display:none"></a>
 
     <h1 class="title-top" id="title">Room</h1>
     <div class="swiper" id="modelSwiper">
@@ -90,7 +90,7 @@
 
     <script type="module">
       const models = [
-        { glb: 'assets/2.glb.usdz', usdz: 'assets/2.glb.usdz' },
+        { glb: 'assets/latest3.usdz', usdz: 'assets/latest3.usdz' },
       ];
       const viewer = document.getElementById('viewer');
       const titleEl = document.getElementById('title');
