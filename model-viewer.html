@@ -40,9 +40,9 @@
     -->
     <model-viewer
       id="viewer"
-      src="assets/room.glb"
-      ios-src="assets/roomm.usdz"
-      alt="Room model"
+      src="assets/2.glb.usdz"
+      ios-src="assets/2.glb.usdz"
+      alt="Brochure model"
       ar
       ar-modes="quick-look"
       ar-placement="floor"
@@ -67,7 +67,7 @@
       </svg>
       Quick Look
     </button>
-    <a id="qlLink" rel="ar" href="assets/roomm.usdz" style="display:none"></a>
+    <a id="qlLink" rel="ar" href="assets/2.glb.usdz" style="display:none"></a>
 
     <h1 class="title-top" id="title">Room</h1>
     <div class="swiper" id="modelSwiper">
@@ -90,8 +90,7 @@
 
     <script type="module">
       const models = [
-        { glb: 'assets/room.glb', usdz: 'assets/room1.1.usdc' },
-        { glb: 'assets/room2.glb', usdz: 'assets/room2.1.usdc' },
+        { glb: 'assets/2.glb.usdz', usdz: 'assets/2.glb.usdz' },
       ];
       const viewer = document.getElementById('viewer');
       const titleEl = document.getElementById('title');
